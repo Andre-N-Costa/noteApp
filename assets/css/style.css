@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+:root {
+    --primary-color: rgb(102, 17, 43);
+    --primary-color-darker: rgb(9, 48, 56);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(136, 68, 68);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}
+
+* {
+    box-sizing: border-box;
+    outline: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--primary-color);
+    font-family: 'Open sans', sans-serif;
+    font-size: 1.3em;
+    line-height: 1.5em;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+.notes {
+    margin: 50px 50px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.add {
+    max-width: 500px;
+    background: rgba(0, 0, 0, 0);
+    padding: 30px;
+    border-radius: 10px;
+    border-style: inset;
+    color: white;
+    font-size: 80px;
+}
+
+.add:hover {
+    background: rgba(0, 0, 0, 0.192);
+}
+
+.add:active {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.note {
+    width: 460.54px;
+    height: 160px;
+    background: rgba(0, 0, 0, 0.089);
+    padding: 30px;
+    border-radius: 10px;
+    border-style: inset;
+    color: white;
+    overflow: hidden;
+}
+
+.note:hover {
+    overflow: auto;
+}
+
+.noteWrite {
+    font-size: 22px;
+    resize: none;
+    position: absolute;
+}
+
+.save{
+    float: right;
+    position: relative;
+    top: 130px;
+    right: 10px;
+    background-color: #b3000000;
+    color: white;
+}
+
+.cancel{
+    float: left;
+    position: relative;
+    top: 130px;
+    left: 10px;
+    background-color: #b3000000;
+    color: white;
+}
