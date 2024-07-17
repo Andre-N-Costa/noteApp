@@ -113,7 +113,7 @@ export default class Note {
         this.noteSection.appendChild(note)
     }
 
-    // Action for the button that cancels the editing of a note
+    // Action for the button that cancels the editing of a note 
     cancelEdit() {
         let edit = this.noteSection.querySelector('.edit')
         let addButton = document.createElement('button')
