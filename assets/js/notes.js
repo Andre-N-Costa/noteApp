@@ -123,7 +123,7 @@ export default class Note {
         this.noteSection.replaceChild(addButton, edit)
     }
 
-    // A new note strctured is created and put in place 
+    // A new note structure is created and put in place 
     createNote() {
         let note = document.createElement('div')
         let notes = this.noteSection.querySelectorAll('.note')

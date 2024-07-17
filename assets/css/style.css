@@ -108,3 +108,27 @@ h1 {
     background-color: #b3000000;
     color: white;
 }
+
+.plus{
+    float: right;
+    position: relative;
+    bottom: 20px;
+    left: 20px;
+    background-color: #b3000000;
+    color: white;
+}
+
+.fav {
+    border-style: none;
+    float: left;
+    position: relative;
+    bottom: 25px;
+    right: 25px;
+    background-color: #b3000000;
+    color: white;
+    font-size: 24px;
+}
+
+.fav:hover{
+    cursor: pointer;
+}
