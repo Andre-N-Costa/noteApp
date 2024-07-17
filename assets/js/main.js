@@ -29,6 +29,15 @@ document.addEventListener('click', function(e){
     }
 })
 
+document.addEventListener('keydown', function(e){
+    // Instead of clicking in 'save' button, its possible to press enter while editing
+    if (e.keyCode == '13' && noteSection.querySelector('.edit')){
+        currentNote.handleNoteCreationAndReplacement()
+        noteArray[currentNote.id] = currentNote
+        saveNotes()
+    }
+})
+
 // Save notes in browser
 function saveNotes(){
     const notesJSON = JSON.stringify(noteArray)

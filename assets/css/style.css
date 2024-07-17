@@ -88,6 +88,7 @@ h1 {
 .noteWrite {
     font-size: 22px;
     resize: none;
+    left: 50px;
     position: absolute;
 }
 

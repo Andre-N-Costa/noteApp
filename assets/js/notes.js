@@ -103,9 +103,24 @@ export default class Note {
     // Build the structure of notes loaded from the browser
     loadNote() {
         let note = document.createElement('div')
+        let btnPlus = document.createElement('button')
+        let btnFav = document.createElement('button')
+
+        btnPlus.innerText = '...'
+
+        if (this.favorite){
+            btnFav.innerText = '★'
+        } else {
+            btnFav.innerText = '☆'
+        }
+        
 
         note.classList.add('note')
         note.classList.add(`note_${this.number}`)
+
+        note.appendChild(btnPlus)
+        note.appendChild(btnFav)
+
         note.innerText = this.text
 
         console.log(this.noteSection)
@@ -129,6 +144,20 @@ export default class Note {
         let notes = this.noteSection.querySelectorAll('.note')
         let edit = this.noteSection.querySelector('.edit')
         let textBox = edit.querySelector('.noteWrite').value
+
+        let btnPlus = document.createElement('button')
+        let btnFav = document.createElement('button')
+
+        btnPlus.innerText = '...'
+
+        if (this.favorite){
+            btnFav.innerText = '★'
+        } else {
+            btnFav.innerText = '☆'
+        }
+
+        note.appendChild(btnPlus)
+        note.appendChild(btnFav)
 
         this.text = textBox
 
