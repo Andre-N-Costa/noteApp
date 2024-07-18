@@ -3,6 +3,8 @@
 :root {
     --primary-color: rgb(102, 17, 43);
     --primary-color-darker: rgb(9, 48, 56);
+    --x: 0.5;
+	--y: 0.5;
 }
 
 /* width */
@@ -38,6 +40,7 @@ body {
     font-family: 'Open sans', sans-serif;
     font-size: 1.3em;
     line-height: 1.5em;
+    position: relative;
 }
 
 h1 {
@@ -132,4 +135,16 @@ h1 {
 
 .fav:hover{
     cursor: pointer;
+}
+
+.settings {
+    display: grid;
+    position: absolute;
+    left: calc((var(--x) - 38) * 1px);
+    top: calc((var(--y) - 41) * 1px);
+}
+
+.setting{
+    background-color: #b3000000;
+    color: white;
 }

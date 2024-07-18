@@ -68,6 +68,15 @@ export default class Note {
         this.noteSection.replaceChild(textBoxArea, NodeForAdd)
     }
 
+    // Replace note with new text
+    editOldNote() {
+        console.log(this.noteSection)
+        let note = this.noteSection.querySelector(`.note_${this.number}`)
+        let textBoxArea = this.createEditNoteBox()
+        console.log(note)
+        this.noteSection.replaceChild(textBoxArea, note)
+    }
+
     // Creation of the editing text box
     createEditNoteBox() {
         let textBox = document.createElement('textarea')
@@ -91,11 +100,9 @@ export default class Note {
     // Send the creation and replacement of notes to the specific method
     handleNoteCreationAndReplacement() {
         if (!this.noteSection.querySelector('.edit')){
-            console.log("LOADING")
             this.loadNote()
         }
         else { 
-            console.log("CREATING")
             this.createNote()
         }
     }
@@ -105,25 +112,26 @@ export default class Note {
         let note = document.createElement('div')
         let btnPlus = document.createElement('button')
         let btnFav = document.createElement('button')
+        let text = document.createElement('p')
 
         btnPlus.innerText = '...'
+        btnPlus.classList.add('plus')
 
         if (this.favorite){
             btnFav.innerText = '★'
         } else {
             btnFav.innerText = '☆'
         }
-        
+        btnFav.classList.add('fav')
 
-        note.classList.add('note')
-        note.classList.add(`note_${this.number}`)
+        text.innerText = this.text
 
         note.appendChild(btnPlus)
         note.appendChild(btnFav)
-
-        note.innerText = this.text
-
-        console.log(this.noteSection)
+        note.appendChild(text)
+        
+        note.classList.add('note')
+        note.classList.add(`note_${this.number}`)
 
         this.noteSection.appendChild(note)
     }
@@ -144,27 +152,31 @@ export default class Note {
         let notes = this.noteSection.querySelectorAll('.note')
         let edit = this.noteSection.querySelector('.edit')
         let textBox = edit.querySelector('.noteWrite').value
+        let text = document.createElement('p')
 
         let btnPlus = document.createElement('button')
         let btnFav = document.createElement('button')
 
         btnPlus.innerText = '...'
+        btnPlus.classList.add('plus')
 
         if (this.favorite){
             btnFav.innerText = '★'
         } else {
             btnFav.innerText = '☆'
         }
+        btnFav.classList.add('fav')
+
+        this.text = textBox
+        text.innerText = textBox
 
         note.appendChild(btnPlus)
         note.appendChild(btnFav)
-
-        this.text = textBox
+        note.appendChild(text)
 
         note.classList.add('note')
-        note.classList.add(`note_${notes.length}`)
-        note.innerText = textBox
-
+        note.classList.add(`note_${notes.length-1}`)
+        
         this.noteSection.appendChild(note)
 
         let addButton = document.createElement('button')
@@ -173,6 +185,34 @@ export default class Note {
 
         this.noteSection.replaceChild(addButton, edit)
 
+    }
+
+    openSettings(){
+        let body = document.querySelector('body')
+        let div = document.createElement('div')
+        let btnEdit = document.createElement('button')
+        let btnDelete = document.createElement('button')
+
+        btnEdit.classList.add('setting')
+        btnEdit.classList.add('editNote')
+        btnEdit.innerText = 'edit'
+
+        btnDelete.classList.add('setting')
+        btnDelete.classList.add('deleteNote')
+        btnDelete.innerText = 'delete'
+
+        div.classList.add('settings')
+
+        div.appendChild(btnEdit)
+        div.appendChild(btnDelete)
+
+        body.appendChild(div)
+    }
+
+    removePlusBtn(){
+        let note = this.noteSection.querySelector(`.note_${this.number}`)
+        let btnPlus = note.querySelector('.plus')
+        note.removeChild(btnPlus)
     }
 
 
