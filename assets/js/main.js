@@ -51,6 +51,23 @@ document.addEventListener('click', function(e){
     // Edit a note
     if (target.classList.contains('editNote')){
         currentNote.editOldNote()
+        let textBoxArea = noteSection.querySelector('.edit').querySelector('.noteWrite')
+        textBoxArea.focus()
+    }
+
+    // Favorite a note (highlight it)
+    if (target.classList.contains('fav')){
+        let note_index = target.parentNode.classList[1][5]
+        currentNote = noteArray[note_index]
+        currentNote.fav = !currentNote.fav
+        if (currentNote.fav){
+            target.innerText = '★'
+        }
+        else{
+            target.innerText = '☆'
+        }
+        saveNotes()
+        location.reload()
     }
 })
 
@@ -64,8 +81,14 @@ document.addEventListener('keydown', function(e){
 })
 
 function saveCursorPosition(x, y) {
-    pos.x = x;
-    pos.y = y;
+
+    // Get the scroll position
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
+    pos.x = x + scrollX;
+    pos.y = y + scrollY;
+
     console.log("posx ", pos.x, " posy ", pos.y)
     document.documentElement.style.setProperty('--x', pos.x);
     document.documentElement.style.setProperty('--y', pos.y);
@@ -81,11 +104,32 @@ function saveNotes(){
 function loadNotes(){
     const notes = localStorage.getItem('notes')
     const newNotesList = JSON.parse(notes)
+    
     console.log(newNotesList)
+
+    const favorites = newNotesList.reduce((acc, note) =>{
+        if (note.favorite) acc.push(note)
+        return acc
+    },[])
+    
+    const notFavorites = newNotesList.reduce((acc, note) =>{
+        if (!note.favorite) acc.push(note)
+        return acc
+    },[])
+    
+    let i = 0
+
     if (newNotesList){
-        for (let note of newNotesList){
+        for (let note of favorites){
             if (note){
-                readNote(note)
+                readNote(note, i)
+                i++
+            }
+        }
+        for (let note of notFavorites){
+            if (note){
+                readNote(note, i)
+                i++
             }
         }
     }
@@ -93,8 +137,8 @@ function loadNotes(){
 }
 
 // Process notes loaded from browser
-function readNote(note){
-    let newNote = new Note(noteSection, note.number, note.text, note.creationDate, note.favorite)
+function readNote(note, number){
+    let newNote = new Note(noteSection, number, note.text, note.creationDate, note.favorite)
     currentNote = newNote
     noteArray[currentNote.id] = currentNote
     currentNote.handleNoteCreationAndReplacement()

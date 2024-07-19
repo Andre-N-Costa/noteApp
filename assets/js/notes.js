@@ -73,7 +73,8 @@ export default class Note {
         console.log(this.noteSection)
         let note = this.noteSection.querySelector(`.note_${this.number}`)
         let textBoxArea = this.createEditNoteBox()
-        console.log(note)
+        textBoxArea.value = this.text
+        console.log(textBoxArea.value)
         this.noteSection.replaceChild(textBoxArea, note)
     }
 
@@ -97,14 +98,20 @@ export default class Note {
         return div
     }
 
-    // Send the creation and replacement of notes to the specific method
+    // Send the creation and replacement of notes to its method
     handleNoteCreationAndReplacement() {
-        if (!this.noteSection.querySelector('.edit')){
-            this.loadNote()
+        if (this.noteSection.querySelector('.add')){
+            if (!this.noteSection.querySelector('.edit')){
+                this.loadNote()
+            }
+            else { 
+                this.editNoteContent(false)
+            }
         }
-        else { 
+        else {
             this.createNote()
         }
+        
     }
 
     // Build the structure of notes loaded from the browser
@@ -138,12 +145,18 @@ export default class Note {
 
     // Action for the button that cancels the editing of a note 
     cancelEdit() {
-        let edit = this.noteSection.querySelector('.edit')
-        let addButton = document.createElement('button')
-        addButton.classList.add('add')
-        addButton.innerText = '+'
+        if (this.noteSection.querySelector('.add')){
+            this.editNoteContent(true)
+        }
+        else {
+            let edit = this.noteSection.querySelector('.edit')
+            let addButton = document.createElement('button')
+            addButton.classList.add('add')
+            addButton.innerText = '+'
 
-        this.noteSection.replaceChild(addButton, edit)
+            this.noteSection.replaceChild(addButton, edit)
+        }
+        
     }
 
     // A new note structure is created and put in place 
@@ -185,6 +198,44 @@ export default class Note {
 
         this.noteSection.replaceChild(addButton, edit)
 
+    }
+
+    editNoteContent(isCanceled){
+        let note = document.createElement('div')
+        let edit = this.noteSection.querySelector('.edit')
+        let textBox = edit.querySelector('.noteWrite').value
+        let text = document.createElement('p')
+
+        let btnPlus = document.createElement('button')
+        let btnFav = document.createElement('button')
+
+        btnPlus.innerText = '...'
+        btnPlus.classList.add('plus')
+
+        if (this.favorite){
+            btnFav.innerText = '★'
+        } else {
+            btnFav.innerText = '☆'
+        }
+        btnFav.classList.add('fav')
+
+        if (!isCanceled){
+            this.text = textBox
+            text.innerText = textBox
+        }
+        else {
+            text.innerText = this.text
+        }
+        
+
+        note.appendChild(btnPlus)
+        note.appendChild(btnFav)
+        note.appendChild(text)
+
+        note.classList.add('note')
+        note.classList.add(`note_${this.number}`)
+
+        this.noteSection.replaceChild(note, edit)
     }
 
     openSettings(){
