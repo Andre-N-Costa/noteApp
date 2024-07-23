@@ -23,12 +23,17 @@ document.addEventListener('click', function(e){
     }
     // Save note creation/editing
     if (target.classList.contains('save')){
+        let note_index = target.parentNode.classList[1][5]
+        currentNote = noteArray[note_index]
         currentNote.handleNoteCreationAndReplacement()
         noteArray[currentNote.id] = currentNote
         saveNotes()
     }
     // Cancel note creation/editing
     if (target.classList.contains('cancel')){
+        console.log(target.parentNode.classList)
+        let note_index = target.parentNode.classList[1][5]
+        currentNote = noteArray[note_index]
         currentNote.cancelEdit()
     }
     // Open settings of a note
@@ -52,7 +57,9 @@ document.addEventListener('click', function(e){
     if (target.classList.contains('editNote')){
         currentNote.editOldNote()
         let textBoxArea = noteSection.querySelector('.edit').querySelector('.noteWrite')
+        textBoxArea.value = currentNote.text
         textBoxArea.focus()
+        
     }
 
     // Favorite a note (highlight it)

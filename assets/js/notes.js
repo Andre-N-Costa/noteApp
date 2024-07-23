@@ -73,8 +73,6 @@ export default class Note {
         console.log(this.noteSection)
         let note = this.noteSection.querySelector(`.note_${this.number}`)
         let textBoxArea = this.createEditNoteBox()
-        textBoxArea.value = this.text
-        console.log(textBoxArea.value)
         this.noteSection.replaceChild(textBoxArea, note)
     }
 
@@ -91,6 +89,7 @@ export default class Note {
         cancelButton.innerText = 'cancel'
         let div = document.createElement('div')
         div.classList.add('edit')
+        div.classList.add(`edit_${this.number}`)
         div.appendChild(textBox)
         div.appendChild(saveButton)
         div.appendChild(cancelButton)
