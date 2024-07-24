@@ -8,8 +8,6 @@ const pos = { x : 0, y : 0 };
 
 loadNotes()
 
-
-
 document.addEventListener('click', function(e){
     console.log(noteArray)
     const target = e.target
@@ -23,8 +21,10 @@ document.addEventListener('click', function(e){
     }
     // Save note creation/editing
     if (target.classList.contains('save')){
-        let note_index = target.parentNode.classList[1][5]
-        currentNote = noteArray[note_index]
+        if (noteSection.querySelector('.add')){
+            let note_index = target.parentNode.classList[1][5]
+            currentNote = noteArray[note_index]
+        }
         currentNote.handleNoteCreationAndReplacement()
         noteArray[currentNote.id] = currentNote
         saveNotes()
@@ -32,8 +32,11 @@ document.addEventListener('click', function(e){
     // Cancel note creation/editing
     if (target.classList.contains('cancel')){
         console.log(target.parentNode.classList)
-        let note_index = target.parentNode.classList[1][5]
-        currentNote = noteArray[note_index]
+        if (noteSection.querySelector('.add')){
+            let note_index = target.parentNode.classList[1][5]
+            currentNote = noteArray[note_index]
+        }
+        
         currentNote.cancelEdit()
     }
     // Open settings of a note
@@ -75,6 +78,20 @@ document.addEventListener('click', function(e){
         }
         saveNotes()
         location.reload()
+    }
+
+    if (target.classList.contains('note-text')) {
+        let note_index = target.parentNode.classList[1][5]
+        currentNote = noteArray[note_index]
+        console.log(currentNote.xtraLines)
+        document.documentElement.style.setProperty('--xtraLines', currentNote.xtraLines);
+    }
+})
+
+document.addEventListener('mouseover', function(e){
+    const target = e.target
+    if (!target.classList.contains('note-text')){
+        document.documentElement.style.setProperty('--xtraLines', 0);
     }
 })
 

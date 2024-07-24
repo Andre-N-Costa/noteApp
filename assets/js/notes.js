@@ -8,6 +8,7 @@ export default class Note {
     constructor(noteSection, number, text, creationDate, favorite) {
         this.number = number
         this.noteSection = noteSection
+        this.xtraLines = 0;
 
         if (text) {
             this.text = text
@@ -130,7 +131,9 @@ export default class Note {
         }
         btnFav.classList.add('fav')
 
-        text.innerText = this.text
+        text.classList.add('note-text')
+
+        text.innerHTML = this.formatText(this.text)
 
         note.appendChild(btnPlus)
         note.appendChild(btnFav)
@@ -140,6 +143,24 @@ export default class Note {
         note.classList.add(`note_${this.number}`)
 
         this.noteSection.appendChild(note)
+    }
+
+    formatText(text) {
+        let newText = ""
+        this.xtraLines = 0
+        while (text.length > 30){
+            newText = newText.concat(text.substring(0,30))
+            text = text.replace(text.substring(0,30), "")
+            newText = newText.concat('<br/>')
+            this.xtraLines++
+        }
+        newText = newText.concat(text)
+        if (this.xtraLines >= 2){
+            this.xtraLines = this.xtraLines - 2
+        }
+        
+        console.log(this.xtraLines)
+        return newText
     }
 
     // Action for the button that cancels the editing of a note 
@@ -179,8 +200,10 @@ export default class Note {
         }
         btnFav.classList.add('fav')
 
+        text.classList.add('note-text')
+
         this.text = textBox
-        text.innerText = textBox
+        text.innerHTML = this.formatText(textBox)
 
         note.appendChild(btnPlus)
         note.appendChild(btnFav)
@@ -218,12 +241,14 @@ export default class Note {
         }
         btnFav.classList.add('fav')
 
+        text.classList.add('note-text')
+
         if (!isCanceled){
             this.text = textBox
-            text.innerText = textBox
+            text.innerHTML = this.formatText(textBox)
         }
         else {
-            text.innerText = this.text
+            text.innerHTML = this.formatText(this.text)
         }
         
 
