@@ -22,7 +22,7 @@ document.addEventListener('click', function(e){
     // Save note creation/editing
     if (target.classList.contains('save')){
         if (noteSection.querySelector('.add')){
-            let note_index = target.parentNode.classList[1][5]
+            let note_index = target.parentNode.classList[1].substring(5)
             currentNote = noteArray[note_index]
         }
         currentNote.handleNoteCreationAndReplacement()
@@ -33,7 +33,7 @@ document.addEventListener('click', function(e){
     if (target.classList.contains('cancel')){
         console.log(target.parentNode.classList)
         if (noteSection.querySelector('.add')){
-            let note_index = target.parentNode.classList[1][5]
+            let note_index = target.parentNode.classList[1].substring(5)
             currentNote = noteArray[note_index]
         }
         
@@ -41,7 +41,7 @@ document.addEventListener('click', function(e){
     }
     // Open settings of a note
     if (target.classList.contains('plus')){
-        let note_index = target.parentNode.classList[1][5]
+        let note_index = target.parentNode.classList[1].substring(5)
         currentNote = noteArray[note_index]
         saveCursorPosition(e.clientX, e.clientY)
         currentNote.removePlusBtn()
@@ -67,7 +67,7 @@ document.addEventListener('click', function(e){
 
     // Favorite a note (highlight it)
     if (target.classList.contains('fav')){
-        let note_index = target.parentNode.classList[1][5]
+        let note_index = target.parentNode.classList[1].substring(5)
         currentNote = noteArray[note_index]
         currentNote.fav = !currentNote.fav
         if (currentNote.fav){
@@ -81,10 +81,16 @@ document.addEventListener('click', function(e){
     }
 
     if (target.classList.contains('note-text')) {
-        let note_index = target.parentNode.classList[1][5]
+        let note_index = target.parentNode.classList[1].substring(5)
         currentNote = noteArray[note_index]
-        console.log(currentNote.xtraLines)
-        document.documentElement.style.setProperty('--xtraLines', currentNote.xtraLines);
+        let xtraLines = calcXtraLines(target)
+        
+        if (document.documentElement.style.getPropertyValue('--xtraLines') == 0){
+            document.documentElement.style.setProperty('--xtraLines', xtraLines)
+        } else {
+            document.documentElement.style.setProperty('--xtraLines', 0)
+        }
+        
     }
 })
 
@@ -116,6 +122,21 @@ function saveCursorPosition(x, y) {
     console.log("posx ", pos.x, " posy ", pos.y)
     document.documentElement.style.setProperty('--x', pos.x);
     document.documentElement.style.setProperty('--y', pos.y);
+}
+
+function calcXtraLines(target) {
+    let lineNumber
+    let xtraLines
+    lineNumber = Math.floor(target.getBoundingClientRect().height.toFixed(2) / 24)
+    console.log(lineNumber)
+    if (lineNumber > 3){
+        xtraLines = lineNumber - 4
+    }
+    else{
+        xtraLines = 0
+    }
+
+    return xtraLines
 }
 
 // Save notes in browser

@@ -52,6 +52,8 @@ h1 {
 p {
     margin-top: 53px;
     margin-left: 20px;
+    max-width: 400px;
+    word-wrap: break-word;
 }
 
 .notes {
@@ -79,6 +81,7 @@ p {
     background-color: rgba(0, 0, 0, 0);
 }
 
+
 .note {
     width: 460.54px;
     height: 160px;
@@ -87,7 +90,7 @@ p {
     border-style: inset;
     color: white;
     overflow: hidden;
-    position: sticky;
+    transition: height 300ms;
 }
 
 .note:hover{
@@ -102,6 +105,11 @@ p {
 
 .note-text {
     cursor: pointer;
+}
+
+.date {
+    position: absolute;
+    font-size: 12px;
 }
 
 .save{
@@ -130,7 +138,6 @@ p {
     background-color: #b3000000;
     color: white;
     position: sticky;
-    z-index: 1;
     left: 420px;
     margin-top: 5px;
     margin-right: 5px;
