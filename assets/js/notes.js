@@ -83,8 +83,8 @@ export default class Note {
         textBox.classList.add('note')
         textBox.classList.add('noteWrite')
         let saveButton = document.createElement('button')
-        saveButton.classList.add('save')
-        saveButton.innerText = 'save'
+        saveButton.classList.add('next')
+        saveButton.innerText = 'next'
         let cancelButton = document.createElement('button')
         cancelButton.classList.add('cancel')
         cancelButton.innerText = 'cancel'
@@ -112,6 +112,11 @@ export default class Note {
             this.createNote()
         }
         
+    }
+
+    handleDateInsertion(){
+        let edit = this.noteSection.querySelector('.edit')
+        let dateInsert = document.createElement('div')
     }
 
     // Build the structure of notes loaded from the browser
@@ -192,7 +197,7 @@ export default class Note {
         note.appendChild(text)
 
         note.classList.add('note')
-        note.classList.add(`note_${notes.length-1}`)
+        note.classList.add(`note_${notes.length-2}`)
         
         this.noteSection.appendChild(note)
 

@@ -108,11 +108,15 @@ p {
 }
 
 .date {
-    position: absolute;
     font-size: 12px;
+    float: left;
+    left: 160px;
+    position: relative;
+    background-color: #b3000000;
+    color: rgb(209, 209, 209);
 }
 
-.save{
+.next{
     float: right;
     position: relative;
     top: 130px;

@@ -20,11 +20,15 @@ document.addEventListener('click', function(e){
         textBoxArea.focus()
     }
     // Save note creation/editing
-    if (target.classList.contains('save')){
+    if (target.classList.contains('next')){
         if (noteSection.querySelector('.add')){
             let note_index = target.parentNode.classList[1].substring(5)
             currentNote = noteArray[note_index]
         }
+        /**
+         * Add a method to open a insert date window in the edit window place
+        */
+        currentNote.handleDateInsertion()
         currentNote.handleNoteCreationAndReplacement()
         noteArray[currentNote.id] = currentNote
         saveNotes()
@@ -69,6 +73,9 @@ document.addEventListener('click', function(e){
     if (target.classList.contains('fav')){
         let note_index = target.parentNode.classList[1].substring(5)
         currentNote = noteArray[note_index]
+        console.log(noteArray)
+        console.log(note_index)
+        console.log(currentNote)
         currentNote.fav = !currentNote.fav
         if (currentNote.fav){
             target.innerText = '★'
