@@ -125,6 +125,23 @@ p {
     color: white;
 }
 
+h4{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.dateBtns{
+    display:flex;
+    gap: 100px;
+    margin-left: 70px;
+    margin-top: 20px;
+}
+
+.dateBtn{
+    background-color: #b3000000;
+    color: white;
+}
+
 .cancel{
     float: left;
     position: relative;
