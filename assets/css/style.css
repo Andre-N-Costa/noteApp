@@ -64,7 +64,7 @@ p {
 }
 
 .add {
-    max-width: 500px;
+    max-width: 460.53px;
     background: rgba(0, 0, 0, 0);
     padding: 30px;
     border-radius: 10px;
@@ -107,6 +107,10 @@ p {
     cursor: pointer;
 }
 
+.edit{
+    width: 460.53px;
+}
+
 .date {
     font-size: 12px;
     float: left;
@@ -114,6 +118,13 @@ p {
     position: relative;
     background-color: #b3000000;
     color: rgb(209, 209, 209);
+}
+
+.dateSelect{
+    background-color: #b3000000;
+    color: rgb(209, 209, 209);
+    position: relative;
+    left: 160px;
 }
 
 .next{

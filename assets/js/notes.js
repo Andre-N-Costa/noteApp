@@ -197,7 +197,7 @@ export default class Note {
         note.appendChild(text)
 
         note.classList.add('note')
-        note.classList.add(`note_${notes.length-2}`)
+        note.classList.add(`note_${notes.length-1}`)
         
         this.noteSection.appendChild(note)
 

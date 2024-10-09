@@ -25,7 +25,7 @@ document.addEventListener('click', function(e){
             let note_index = target.parentNode.classList[1].substring(5)
             currentNote = noteArray[note_index]
         }
-        /**
+        /*
          * Add a method to open a insert date window in the edit window place
         */
         currentNote.handleDateInsertion()
@@ -185,7 +185,6 @@ function loadNotes(){
             }
         }
     }
-
 }
 
 // Process notes loaded from browser
